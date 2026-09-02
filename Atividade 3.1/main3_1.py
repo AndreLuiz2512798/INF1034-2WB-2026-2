@@ -70,9 +70,9 @@ def cria_plano():
     t.pu()
     t.right(90)
 
-def desenha_poligono(lado, tamanho, cor):
+def desenha_poligono(x, y, lado, tamanho, cor):
     t.pu()
-    t.goto(0, 0)
+    t.goto(x, y)
     t.pd()
 
     t.fillcolor(cor)
@@ -113,13 +113,12 @@ lado = float(textinput("Escolha do tamanho do lado", "Digite o tamanho do lado d
 var_color = textinput("Escolha da cor", "Digite a cor do hexagono")
 desenha_hexagono(x, y, lado, var_color)
 
-sleep(1)
-t.clear()
-
 #Poligono qualquer
+x = randint(-400, 400)
+y = randint(-400, 400)
 lado = int(textinput("Escolha dos lado", "Digite quantos lados tem o poligono: "))
 tamanho = float(textinput("Escolha do tamanho do lado", "Digite o tamanho do lado do poligono: "))
 var_color = textinput("Escolha da cor", "Digite a cor do poligono")
-desenha_poligono(lado, tamanho, var_color)
+desenha_poligono(x, y, lado, tamanho, var_color)
 
 mainloop()
