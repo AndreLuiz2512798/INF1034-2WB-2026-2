@@ -132,11 +132,11 @@ def desenha_lua_nepal(x, y, cor1, cor2):
     t.pu()
     t.goto(x, y)
     t.pd()
-    circulo(35, cor1)
+    circulo(x, y, 35, cor1)
     t.pu()
     t.goto(x, y + 15)
     t.pd()
-    circulo(35, cor2)
+    circulo(x, y, 35, cor2)
 
 def desenha_estrela_nepal(x, y, lado, cor):
     t.pu()
@@ -157,55 +157,55 @@ def desenha_nepal():
     desenha_estrela_nepal(75, 200, 10, "white")
     desenha_estrela_nepal(70, 70, 25, "white")
 
-# desenha_franca()
+desenha_franca()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_italia()
+desenha_italia()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_costa_rica()
+desenha_costa_rica()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_noruega()
+desenha_noruega()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_finlandia()
+desenha_finlandia()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_islandia()
+desenha_islandia()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_emirados_arabes()
+desenha_emirados_arabes()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_guine_bissau()
+desenha_guine_bissau()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_japao()
+desenha_japao()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
-# desenha_honduras()
+desenha_honduras()
 
-# sleep(1)
-# t.clear()
+sleep(1)
+t.clear()
 
 desenha_georgia()
 
@@ -217,6 +217,32 @@ desenha_nepal()
 sleep(1)
 t.clear()
 
+var_bandeira = textinput("Escolha da bandeira", "Digite a bandeira que quer desenhar")
+
+if (var_bandeira.lower() == "frança"):
+    desenha_franca()
+elif (var_bandeira.lower() == "italia"):
+    desenha_italia()
+elif (var_bandeira.lower() == "costa rica"):
+    desenha_costa_rica()
+elif (var_bandeira.lower() == "noruega"):
+    desenha_noruega()
+elif (var_bandeira.lower() == "finlandia"):
+    desenha_finlandia()
+elif (var_bandeira.lower() == "islandia"):
+    desenha_islandia()
+elif (var_bandeira.lower() == "emirados arabes"):
+    desenha_emirados_arabes()
+elif (var_bandeira.lower() == "guine bissau"):
+    desenha_guine_bissau()
+elif (var_bandeira.lower() == "japao"):
+    desenha_japao()
+elif (var_bandeira.lower() == "honduras"):
+    desenha_honduras()
+elif (var_bandeira.lower() == "georgia"):
+    desenha_georgia()
+elif (var_bandeira.lower() == "nepal"):
+    desenha_nepal()
 
 
 mainloop()
