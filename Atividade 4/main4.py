@@ -22,13 +22,17 @@ def calcula_x_elevado_3(x):
     return x**3 - x**2 - x + 1
 
 def corrida(n):
+    tartarugas = []
+    
     for x in range(n):
-        list(x= Turtle())
-        x.shape("turtle")
-        x.goto(-200, 100 + (x*10))
+        tartaruga = Turtle()
+        tartaruga.shape("turtle")
+        tartaruga.goto(-200, 100 + (x*10))
+        tartarugas.append(tartaruga)
 
     for num in range(30):
-        list.fd(randint(5, 10))
+        for tartaruga in tartarugas:
+            tartaruga.fd(randint(5, 10))
 
 t = Turtle()
 t.speed(0)
@@ -127,11 +131,11 @@ t.pd()
 for x in range(-99, 101):
     t.goto(x, calcula_x_elevado_3(x))
 
-# sleep(2)
-# t.clear()
+sleep(2)
+t.clear()
 
-# t.color("black")
+t.color("black")
 
-# corrida(3)
+corrida(3)
 
 mainloop()
