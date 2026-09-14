@@ -27,7 +27,9 @@ def corrida(n):
     for x in range(n):
         tartaruga = Turtle()
         tartaruga.shape("turtle")
-        tartaruga.goto(-200, 100 + (x*10))
+        tartaruga.pu()
+        tartaruga.goto(-200, 100 + (x*20))
+        tartaruga.pd()
         tartarugas.append(tartaruga)
 
     for num in range(30):
@@ -136,6 +138,7 @@ t.clear()
 
 t.color("black")
 
-corrida(3)
+n = int(textinput("Quantidade de tartarugas", "Digite quantas tartarugas você quer na corrida"))
+corrida(n)
 
 mainloop()
