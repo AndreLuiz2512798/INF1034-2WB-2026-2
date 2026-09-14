@@ -48,90 +48,90 @@ def desenha_plano():
     t.stamp()
     t.rt(90)
 
-# desenha_plano()
+desenha_plano()
 
-# t.color("blue")
-# t.pu()
-# t.goto(0, calcula_raiz(0))
-# t.pd()
-# for x in range(1, 150):
-#     t.goto(2*x, calcula_raiz(2*x))
+t.color("blue")
+t.pu()
+t.goto(0, calcula_raiz(0))
+t.pd()
+for x in range(1, 150):
+    t.goto(2*x, calcula_raiz(2*x))
 
-# sleep(2)
-# t.clear()
+sleep(2)
+t.clear()
 
 t.color("black")
 desenha_plano()
 
 t.color("blue")
 t.pu()
-t.goto(-100, calcula_fracao(-100))
+t.goto(-100, 100 * calcula_fracao(-100))
 t.pd()
 for x in range(-100, 0):
-    t.goto(x, calcula_fracao(x))
+    t.goto(x, 100 * calcula_fracao(x))
 t.pu()
-t.goto(1, calcula_fracao(1))
+t.goto(0.1, 100 * calcula_fracao(1))
 t.pd()
-for x in range(2, 101):
-    t.goto(x, calcula_fracao(x))
+for x in range(1, 101):
+    t.goto(x, 100 * calcula_fracao(x))
 
 sleep(2)
 t.clear()
 
-# t.color("black")
-# desenha_plano()
+t.color("black")
+desenha_plano()
 
-# t.color("blue")
-# t.pu()
-# t.goto(-60, calcula_2_elevado(-60))
-# t.pd()
-# for x in range(-59, 6):
-#     t.goto(2*x, calcula_2_elevado(2*x))
+t.color("blue")
+t.pu()
+t.goto(-60, calcula_2_elevado(-60))
+t.pd()
+for x in range(-59, 6):
+    t.goto(2*x, calcula_2_elevado(2*x))
 
-# sleep(2)
-# t.clear()
-
-# t.color("black")
-# desenha_plano()
-
-# t.color("blue")
-# t.pu()
-# t.goto(-200, calcula_menos_5(-200))
-# t.pd()
-# for x in range(-99, 101):
-#     t.goto(2*x, calcula_menos_5(2*x))
-
-# sleep(2)
-# t.clear()
-
-# t.color("black")
-# desenha_plano()
-
-# t.color("blue")
-# t.pu()
-# t.goto(-200, calcula_x_quadrado(-200))
-# t.pd()
-# for x in range(-99, 101):
-#     t.goto(2*x, calcula_x_quadrado(2*x))
-
-# sleep(2)
-# t.clear()
-
-# t.color("black")
-# desenha_plano()
-
-# t.color("blue")
-# t.pu()
-# t.goto(-100, calcula_x_elevado_3(-100))
-# t.pd()
-# for x in range(-99, 101):
-#     t.goto(x, calcula_x_elevado_3(x))
-
-# sleep(2)
-# t.clear()
+sleep(2)
+t.clear()
 
 t.color("black")
+desenha_plano()
 
-corrida(3)
+t.color("blue")
+t.pu()
+t.goto(-200, calcula_menos_5(-200))
+t.pd()
+for x in range(-99, 101):
+    t.goto(2*x, calcula_menos_5(2*x))
+
+sleep(2)
+t.clear()
+
+t.color("black")
+desenha_plano()
+
+t.color("blue")
+t.pu()
+t.goto(-200, calcula_x_quadrado(-200))
+t.pd()
+for x in range(-99, 101):
+    t.goto(2*x, calcula_x_quadrado(2*x))
+
+sleep(2)
+t.clear()
+
+t.color("black")
+desenha_plano()
+
+t.color("blue")
+t.pu()
+t.goto(-100, calcula_x_elevado_3(-100))
+t.pd()
+for x in range(-99, 101):
+    t.goto(x, calcula_x_elevado_3(x))
+
+# sleep(2)
+# t.clear()
+
+# t.color("black")
+
+# corrida(3)
 
 mainloop()
