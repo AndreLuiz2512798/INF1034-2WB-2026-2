@@ -7,9 +7,11 @@ screen = display.set_mode((800, 600))
 rick_morty_img = image.load("Atividade 5/rick_morty.png")
 rick_morty_img = transform.scale(rick_morty_img, (100, 130))
 fonte = font.Font("Atividade 5/get_schwifty.ttf", 30)
-# mixer.music.load("batman_1966.mp3")
-# mixer.music.play(-1)
+mixer.music.load("Atividade 5/lv_0_20260919140841.mp3")
+mixer.music.play(-1)
 
+nuvem_x = 0
+velocidade = 1
 
 running = True
 while running:
@@ -40,13 +42,20 @@ while running:
     #Árvore
     draw.rect(screen, "#503621", (600, 300, 40, 200))
     draw.circle(screen, "#489D25", (620, 300), 100)
-    #Nuvem
-    draw.circle(screen, "#FFFFFF", (600, 100), 40)
-    draw.circle(screen, "#FFFFFF", (630, 100), 40)
-    draw.circle(screen, "#FFFFFF", (660, 100), 40)
-    draw.circle(screen, "#FFFFFF", (690, 100), 40)
 
-    # #Desenhando imagem
+    #Nuvem
+    nuvem_x += velocidade
+
+    if nuvem_x > 800:
+        nuvem_x = 0
+
+    draw.circle(screen, "#FFFFFF", (600 + nuvem_x, 100), 40)
+    draw.circle(screen, "#FFFFFF", (630 + nuvem_x, 100), 40)
+    draw.circle(screen, "#FFFFFF", (660 + nuvem_x, 100), 40)
+    draw.circle(screen, "#FFFFFF", (690 + nuvem_x, 100), 40)
+
+
+    #Desenhando imagem
     screen.blit(rick_morty_img, (420, 380))
 
     #Escrevendo o texto
