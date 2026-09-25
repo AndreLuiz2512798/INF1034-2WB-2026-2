@@ -14,6 +14,11 @@ mixer.music.play(-1)
 #Variáveis
 nuvem_x = 0
 velocidade = 100
+sol_x = 100
+sol_y = 100
+controle_teclado = False
+ultimo_mouse_x = 100
+ultimo_mouse_y = 100
 
 running = True
 while running:
@@ -23,20 +28,38 @@ while running:
         if ev.type == QUIT:
             running = False
         #Ação instantanea
-        if ev.type == KEYDOWN:
+        #if ev.type == KEYDOWN:
 
 
     ##Seção para movimentação e interação
     #Estrutura de movimentação no teclado
-    # keys = key.get_pressed()
+    keys = key.get_pressed()
 
-    # if keys[K_RIGHT]:
-    #     nuvem_x += 100 * dt
-    # elif keys[K_LEFT]:
-    #     nuvem_x += -100 * dt
+    #Sol
+    if keys[K_RIGHT] or keys[K_LEFT] or keys[K_UP] or keys[K_DOWN]:
+        controle_teclado = True
+  
+    if controle_teclado:
+        if keys[K_RIGHT]:
+            sol_x += 100 * dt
+        if keys[K_LEFT]:
+            sol_x += -100 * dt
+        if keys[K_UP]:
+            sol_y += -100 * dt
+        if keys[K_DOWN]:
+            sol_y += 100 * dt
+
 
     #Estrutura de movimentação no mouse
     mouse_x, mouse_y = mouse.get_pos()
+
+    if mouse_x != ultimo_mouse_x or mouse_y != ultimo_mouse_y:
+        sol_x = mouse_x
+        sol_y = mouse_y
+        controle_teclado = False
+
+    ultimo_mouse_x = mouse_x
+    ultimo_mouse_y = mouse_y
 
     #Nuvem
     dt = clock.get_time()/1000
@@ -50,15 +73,14 @@ while running:
 
     ##Seção para desenhar os elementos
     #Tela
-    screen.fill("#97D1FA")
+    if sol_y > 400:
+        screen.fill("#0D1664")
+    elif sol_y > 200:
+        screen.fill("#F3D355")
+    elif sol_y > 0:
+        screen.fill("#97D1FA")
     #Grama
     draw.rect(screen, "#489D25", (0, 500, 800, 100))
-    #Sol
-    draw.line(screen, "#FFF251", (40, 40), (160, 160), 10)
-    draw.line(screen, "#FFF251", (40, 160), (160, 40), 10)
-    draw.line(screen, "#FFF251", (30, 100), (170, 100), 10)
-    draw.line(screen, "#FFF251", (100, 30), (100, 170), 10)
-    draw.circle(screen, "#FFF251", (100, 100), 40)
     #Base da casa
     draw.rect(screen, "#D1CFC0", (200, 300, 200, 200))
     #Telhado
@@ -72,6 +94,12 @@ while running:
     #Árvore
     draw.rect(screen, "#503621", (600, 300, 40, 200))
     draw.circle(screen, "#489D25", (620, 300), 100)
+    #Sol
+    draw.line(screen, "#FFF251", (sol_x - 60, sol_y - 60), (sol_x + 60, sol_y + 60), 10)
+    draw.line(screen, "#FFF251", (sol_x - 60, sol_y + 60), (sol_x + 60, sol_y - 60), 10)
+    draw.line(screen, "#FFF251", (sol_x - 70, sol_y), (sol_x + 70, sol_y), 10)
+    draw.line(screen, "#FFF251", (sol_x, sol_y - 70), (sol_x, sol_y + 70), 10)
+    draw.circle(screen, "#FFF251", (sol_x, sol_y), 40)
     #Nuvem
     draw.circle(screen, "#FFFFFF", (600 + nuvem_x, 100), 40)
     draw.circle(screen, "#FFFFFF", (630 + nuvem_x, 100), 40)
