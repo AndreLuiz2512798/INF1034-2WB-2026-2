@@ -4,12 +4,20 @@ init()
 screen = display.set_mode((800, 600))
 clock = time.Clock()
 
+#Função
+def mistura_cor(cor1, cor2, t):
+    return tuple(
+        int(cor1[i] + (cor2[i] - cor1[i]) * t)
+        for i in range(3)
+    )
+
 #Recursos
 rick_morty_img = image.load("Atividade 6/rick_morty.png")
 rick_morty_img = transform.scale(rick_morty_img, (100, 130))
 fonte = font.Font("Atividade 6/get_schwifty.ttf", 30)
-mixer.music.load("Atividade 6/lv_0_20260919140841.mp3")
-mixer.music.play(-1)
+som1 = mixer.Sound("Atividade 6/som1.mp3")
+som2 = mixer.Sound("Atividade 6/som2.mp3")
+som3 = mixer.Sound("Atividade 6/som3.mp3")
 
 #Variáveis
 nuvem_x = 0
@@ -28,7 +36,13 @@ while running:
         if ev.type == QUIT:
             running = False
         #Ação instantanea
-        #if ev.type == KEYDOWN:
+        if ev.type == MOUSEBUTTONUP:
+            if sol_y > 400:
+                som3.play()
+            elif sol_y > 200:
+                som2.play()
+            elif sol_y > 0:
+                som1.play()
 
 
     ##Seção para movimentação e interação
@@ -49,7 +63,6 @@ while running:
         if keys[K_DOWN]:
             sol_y += 100 * dt
 
-
     #Estrutura de movimentação no mouse
     mouse_x, mouse_y = mouse.get_pos()
 
@@ -60,6 +73,18 @@ while running:
 
     ultimo_mouse_x = mouse_x
     ultimo_mouse_y = mouse_y
+
+
+    if sol_x > 800:
+        sol_x = 800
+    elif sol_x < 0:
+        sol_x = 0
+
+    if sol_y > 600:
+        sol_y = 600
+    elif sol_y < 0:
+        sol_y = 0
+
 
     #Nuvem
     dt = clock.get_time()/1000
@@ -73,12 +98,18 @@ while running:
 
     ##Seção para desenhar os elementos
     #Tela
-    if sol_y > 400:
-        screen.fill("#0D1664")
-    elif sol_y > 200:
-        screen.fill("#F3D355")
-    elif sol_y > 0:
-        screen.fill("#97D1FA")
+    dia = (151, 209, 250)
+    tarde = (243, 211, 85)
+    noite = (13, 22, 100) 
+
+    if sol_y <= 200:
+        t = max(0, sol_y / 200)
+        cor_fundo = mistura_cor(dia, tarde, t)
+    else:
+        t = min(1, (sol_y - 200) / 200)
+        cor_fundo = mistura_cor(tarde, noite, t)
+
+    screen.fill(cor_fundo)
     #Grama
     draw.rect(screen, "#489D25", (0, 500, 800, 100))
     #Base da casa
