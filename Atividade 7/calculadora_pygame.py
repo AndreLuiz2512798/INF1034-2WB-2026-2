@@ -21,7 +21,6 @@ screen = display.set_mode((800, 600))
 resultado = 0
 operacoes = ["+", "-", "*", "/"]
 
-
 font = font.Font(None, 36)
 numeros = [
     ["7", "8", "9"],
@@ -29,6 +28,7 @@ numeros = [
     ["1", "2", "3"],
     ["0", "."]
 ]
+
 x_inicial = 210
 y_inicial = 260
 largura_tecla = 100
@@ -38,14 +38,18 @@ espaco = 10
 numero1 = None
 numero2 = None
 operacao = None
+valor_clicado = None
 
 running = True
 while running:
     for ev in event.get():
         if ev.type == QUIT:
             running = False
+
         if ev.type == MOUSEBUTTONUP:
             mouse_x, mouse_y = ev.pos
+            valor_clicado = None
+
             for i, linha in enumerate(numeros):
                 for j, numero in enumerate(linha):
                     x = x_inicial + j * (largura_tecla + espaco)
@@ -57,56 +61,63 @@ while running:
             for i, op in enumerate(operacoes):
                 op_x = 540
                 op_y = 260 + i * (altura_tecla + espaco)
+
                 if op_x <= mouse_x <= op_x + 50 and op_y <= mouse_y <= op_y + 50:
                     valor_clicado = op
 
-        if valor_clicado:
-            if valor_clicado in operacoes:
-                if numero1 is not None:
-                    operacao = valor_clicado
-            elif valor_clicado == ".":
-                if operacao is None:
-                    if numero1 is None:
-                        numero1 = "0."
-                    elif "." not in numero1:
-                        numero1 += "."
-                else:
-                    if numero2 is None:
-                        numero2 = "0."
-                    elif "." not in numero2:
-                        numero2 += "."
-            else: 
-                if operacao is None:
-                    if numero1 is None:
-                        numero1 = valor_clicado
-                    else:
-                        numero1 += valor_clicado  
-                else:  
-                    if numero2 is None:
-                        numero2 = valor_clicado
-                    else:
-                        numero2 += valor_clicado
+            if 430 <= mouse_x <= 530 and 440 <= mouse_y <= 490:
+                valor_clicado = "="
 
-            if numero1 is not None and numero2 is not None and operacao is not None:
-                try:
-                    resultado = calcular(float(numero1), float(numero2), operacao)
-                    numero1 = str(resultado)
-                    numero2 = None
-                    operacao = None
-                except ValueError:
-                    numero1 = None
-                    numero2 = None
-                    operacao = None
+            if valor_clicado:
+                if valor_clicado in operacoes:
+                    if numero1 is not None:
+                        operacao = valor_clicado
+
+                elif valor_clicado == "=":
+                    if numero1 is not None and numero2 is not None and operacao is not None:
+                        try:
+                            resultado = calcular(float(numero1), float(numero2), operacao)
+                            numero1 = str(resultado)
+                            numero2 = None
+                            operacao = None
+                        except ValueError:
+                            numero1 = None
+                            numero2 = None
+                            operacao = None
+
+                elif valor_clicado == ".":
+                    if operacao is None:
+                        if numero1 is None:
+                            numero1 = "0."
+                        elif "." not in numero1:
+                            numero1 += "."
+                    else:
+                        if numero2 is None:
+                            numero2 = "0."
+                        elif "." not in numero2:
+                            numero2 += "."
+
+                else:
+                    if operacao is None:
+                        if numero1 is None:
+                            numero1 = valor_clicado
+                        else:
+                            numero1 += valor_clicado
+                    else:
+                        if numero2 is None:
+                            numero2 = valor_clicado
+                        else:
+                            numero2 += valor_clicado
 
             valor_clicado = None
 
     screen.fill("#FFFFFF")
 
-    #Desenhos
+    # Desenhos
     draw.rect(screen, "#4D4453", (200, 100, 400, 400))
     draw.rect(screen, "#D5E2E2", (210, 110, 380, 100))
 
-    #Teclas
+    # Teclas
     draw.rect(screen, "#28262F", (210, 260, 100, 50))
     draw.rect(screen, "#28262F", (320, 260, 100, 50))
     draw.rect(screen, "#28262F", (430, 260, 100, 50))
@@ -123,70 +134,52 @@ while running:
     draw.rect(screen, "#28262F", (320, 440, 100, 50))
     draw.rect(screen, "#28262F", (430, 440, 100, 50))
 
-    ##Operações
+    # Operações
     draw.rect(screen, "#A65F6D", (540, 260, 50, 50))
     draw.rect(screen, "#A65F6D", (540, 320, 50, 50))
     draw.rect(screen, "#A65F6D", (540, 380, 50, 50))
     draw.rect(screen, "#A65F6D", (540, 440, 50, 50))
 
-    #Divisão
+    # Divisão
     draw.line(screen, "#FFFFFF", (550, 285), (580, 285), 2)
     draw.circle(screen, "#FFFFFF", (565, 277), 3)
     draw.circle(screen, "#FFFFFF", (565, 295), 3)
 
-    #Multiplicação
+    # Multiplicação
     draw.line(screen, "#FFFFFF", (550, 360), (580, 330), 2)
     draw.line(screen, "#FFFFFF", (550, 330), (580, 360), 2)
 
-    #Subtração
+    # Subtração
     draw.line(screen, "#FFFFFF", (550, 405), (580, 405), 2)
 
-    #Adição
+    # Adição
     draw.line(screen, "#FFFFFF", (565, 450), (565, 480), 2)
     draw.line(screen, "#FFFFFF", (550, 465), (580, 465), 2)
 
-    #Virgula
+    # Vírgula
     draw.circle(screen, "#FFFFFF", (370, 470), 5)
 
-    #Resultado
+    # Resultado
     draw.line(screen, "#FFFFFF", (460, 460), (500, 460), 4)
     draw.line(screen, "#FFFFFF", (460, 470), (500, 470), 4)
 
-
+    # Números
     for i, linha in enumerate(numeros):
         for j, numero in enumerate(linha):
             x = x_inicial + j * (largura_tecla + espaco)
             y = y_inicial + i * (altura_tecla + espaco)
 
-            texto = font.render(numero, True, "#FFFFFF")  # Cor do texto: branco
-            texto_rect = texto.get_rect(center=(x + largura_tecla // 2, y + altura_tecla // 2))
+            texto = font.render(numero, True, "#FFFFFF")
+            texto_rect = texto.get_rect(
+                center=(x + largura_tecla // 2, y + altura_tecla // 2)
+            )
 
             screen.blit(texto, texto_rect)
 
-    # digito1 = input("")
-
-    # if digito1 in operacoes:
-    #     digito2 = input("")
-    #     try:
-    #         numero1 = float(resultado)
-    #         numero2 = float(digito2)
-    #         resultado = calcular(numero1, numero2, digito1)
-    #     except ValueError:
-    #         print("Entrada inválida. Digite apenas números.")
-    # else:
-    #     digito2 = input("")
-    #         break
-    #     digito3 = input("")
-    #         break
-
-    #     try:
-    #         numero1 = float(digito1)
-    #         numero2 = float(digito3)
-    #         operacao = digito2
-    #         resultado = calcular(numero1, numero2, operacao)
-    #     except ValueError:
-    #         print("Entrada inválida. Digite apenas números.")
-
-    # print(f"Resultado: {resultado}\n")
+    # Mostra o número no visor
+    if numero1 is not None:
+        texto_resultado = font.render(str(numero1), True, "#28262F")
+        texto_rect = texto_resultado.get_rect(midright=(570, 160))
+        screen.blit(texto_resultado, texto_rect)
 
     display.update()
