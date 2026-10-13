@@ -98,6 +98,8 @@ while running:
             senha_cripto = criptografa(input_string)
             valid_text = fonte_validation.render(f"Senha válida! Senha criptografada: {senha_cripto}", True, "green")
             screen.blit(valid_text, (120, 180))
+            sleep(2)
+            import main6
         elif not valid_email:
             valid_text = fonte_validation.render("O seu e-mail não é válido. Digite novamente!", True, "red")
             screen.blit(valid_text, (120, 180))
